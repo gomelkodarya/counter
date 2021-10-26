@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
 import {CounterContainer} from "./components/CounterContainer/CounterContainer";
+import {ValueContainer} from "./components/ValueContainer/ValueContainer";
 
 function App() {
     // const
@@ -25,6 +26,9 @@ function App() {
 
     return (
         <div className='container'>
+            <ValueContainer
+
+            />
             <CounterContainer
                 value={value}
                 incValue={incValue}

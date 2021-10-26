@@ -1,0 +1,10 @@
+.value_block {
+  width: 250px;
+  height: 150px;
+  background-color: darkcyan;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 150px;
+  font-size: 60px;
+  color: black;
+}
