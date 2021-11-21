@@ -8,9 +8,9 @@ type ValueContainerPropsType = {
     startValue: number
     value: number
     incValue: (value:number) => void
-    resetValue: () => void
     addMaxValue: (value: number) => void
     addStartValue: (value: number) => void
+    error: string | null
 }
 
 export const ValueContainer = (props: ValueContainerPropsType) => {
@@ -20,11 +20,16 @@ export const ValueContainer = (props: ValueContainerPropsType) => {
                 maxValue={props.maxValue}
                 startValue={props.startValue}
                 addMaxValue={props.addMaxValue}
-                addStartValue={props.addStartValue} />
+                addStartValue={props.addStartValue}
+                error={props.error}
+            />
             <SetBlock
                 value={props.value}
+                maxValue={props.maxValue}
+                startValue={props.startValue}
                 incValue={props.incValue}
-                resetValue={props.resetValue}/>
+                error={props.error}
+            />
         </div>
     )
 }

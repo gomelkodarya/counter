@@ -1,13 +1,17 @@
-import React from "react";
+import React, {useState} from "react";
 import s from './SetBlock.module.css'
+import {Button} from "../../Button";
 
 type SetBlockPropsType = {
     value: number
+    startValue: number
+    maxValue: number
     incValue: (value:number) => void
-    resetValue: () => void
+    error: string | null
 }
 
 export const SetBlock = (props: SetBlockPropsType) => {
+
     const onClickSetHandler = () => {
         let value = Number(localStorage.getItem('startValue'))
         props.incValue(value-1)
@@ -15,9 +19,7 @@ export const SetBlock = (props: SetBlockPropsType) => {
 
     return (
         <div className={s.set_block}>
-            <button onClick={onClickSetHandler}>
-                set
-            </button>
+            <Button title={'set'} callBack={onClickSetHandler}/>
         </div>
     )
 }

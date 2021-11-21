@@ -5,7 +5,8 @@ import {ValueContainer} from "./components/ValueContainer/ValueContainer";
 
 function App() {
     // const
-    let [value, setValue] = useState<number>(0);
+    let [value, setValue] = useState(0);
+    let [error, setError] = useState<string | null>(null);
     let [maxValue, setMaxValue] =useState<number>(Number(localStorage.getItem('maxValue')))
     let [startValue, setStartValue] =useState<number>(Number(localStorage.getItem('startValue')))
 
@@ -13,13 +14,30 @@ function App() {
     localStorage.setItem('startValue', JSON.stringify(startValue));
 
     const addMaxValue = (value: number) => {
+        if (value <= startValue) {
+            setError('Error')
+            setMaxValue(value)
+            return
+        }
+        if (error) {
+            setError('')
+        }
         setMaxValue(value)
     }
 
     const addStartValue = (value: number) => {
+        if(value<0 || value >= maxValue) {
+            setError('Error')
+            setStartValue(value)
+            return
+        }
+        if (error) {
+            setError('')
+        }
         setStartValue(value)
     }
     // who return types function
+
     const incValue = (value: number): void => {
         if (value < maxValue) {
             // const
@@ -34,6 +52,7 @@ function App() {
 
     const resetValue = () => {
         setValue(value = startValue)
+
     }
 
     return (
@@ -45,12 +64,15 @@ function App() {
                 addStartValue={addStartValue}
                 value={value}
                 incValue={incValue}
-                resetValue={resetValue}/>
+                error={error}
+            />
             <CounterContainer
                 value={value}
                 maxValue={maxValue}
+                startValue={startValue}
                 incValue={incValue}
                 resetValue={resetValue}
+                error={error}
             />
         </div>
     );

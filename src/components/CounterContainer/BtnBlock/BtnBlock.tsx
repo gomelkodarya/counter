@@ -1,10 +1,12 @@
 import React from "react";
 import s from './BtnBlock.module.css'
+import {Button} from "../../Button";
 
 
 type BtnBlockPropsType = {
-    value:number
+    value: number
     maxValue: number
+    startValue: number
     incValue: (value:number) => void
     resetValue: () => void
 }
@@ -20,23 +22,8 @@ export const BtnBlock = (props: BtnBlockPropsType) => {
 
     return (
         <div className={s.btn_block}>
-            {/*<Button title={'inc'} callBack={incValueHandler}/>*/}
-            {/*<Button title={'reset'} callBack={resetValueHandler}/>*/}
-
-            <button
-                className={s.button}
-                disabled={props.value === props.maxValue}
-                onClick={incValueHandler}
-            >
-                inc
-            </button>
-
-            <button
-                disabled={props.value === 0 }
-                onClick={resetValueHandler}
-            >
-                reset
-            </button>
+            <Button title={'inc'} callBack={incValueHandler}/>
+            <Button title={'reset'} callBack={resetValueHandler}/>
         </div>
     )
 }

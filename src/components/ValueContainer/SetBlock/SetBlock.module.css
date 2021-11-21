@@ -17,6 +17,11 @@ button {
   color: black;
   font-size: 30px;
 }
+
 button:disabled {
   opacity: 50%;
+}
+
+button:enabled {
+  opacity: 10;
 }

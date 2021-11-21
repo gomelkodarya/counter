@@ -6,6 +6,7 @@ type ValueBlockPropsType = {
     startValue: number
     addMaxValue: (value: number) => void
     addStartValue: (value: number) => void
+    error: string | null
 }
 
 export const ValueBlock = (props: ValueBlockPropsType) => {
@@ -20,10 +21,10 @@ export const ValueBlock = (props: ValueBlockPropsType) => {
     return (
         <div className={s.value_block}>
             <div className={s.value}>
-                max value: <input type={"number"} value={props.maxValue} onChange={onChangeMaxValueHandler}/>
+                max value: <input type={"number"} value={props.maxValue} onChange={onChangeMaxValueHandler} className={props.error ? s.red : ''}/>
             </div>
             <div className={s.value}>
-                start value: <input type={"number"} value={props.startValue} onChange={onchangeStartValueHandler}/>
+                start value: <input type={"number"} value={props.startValue} onChange={onchangeStartValueHandler}className={props.error ? s.red : ''}/>
             </div>
         </div>
     )

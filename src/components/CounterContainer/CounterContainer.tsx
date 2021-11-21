@@ -6,8 +6,10 @@ import {BtnBlock} from "./BtnBlock/BtnBlock";
 type CounterContainerPropsType = {
     value: number
     maxValue: number
+    startValue: number
     incValue: (value: number) => void
     resetValue: () => void
+    error: string | null
 }
 
 export const CounterContainer = (props: CounterContainerPropsType) => {
@@ -15,10 +17,13 @@ export const CounterContainer = (props: CounterContainerPropsType) => {
         <div className={s.counter_container}>
             <CounterBlock
                 value={props.value}
-                maxValue={props.maxValue}/>
+                maxValue={props.maxValue}
+                error={props.error}
+            />
             <BtnBlock
                 value={props.value}
                 maxValue={props.maxValue}
+                startValue={props.startValue}
                 incValue={props.incValue}
                 resetValue={props.resetValue}
             />
