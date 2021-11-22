@@ -9,3 +9,27 @@
   border-radius: 5px;
   margin: 40px;
 }
+
+.btn_block {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 250px;
+  height: 100px;
+  border: darkcyan 3px solid;
+  border-radius: 5px;
+}
+
+.button {
+  width: 100px;
+  height: 50px;
+  background: darkcyan;
+  border-radius: 5px;
+  color: black;
+  font-size: 30px;
+}
+
+button:disabled {
+  opacity: 50%;
+}

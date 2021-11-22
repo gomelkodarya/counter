@@ -3,6 +3,7 @@ import React from "react";
 type ButtonType = {
     title: string
     callBack: () => void
+    disabled?: any
 }
 
 export const Button = (props: ButtonType) => {
@@ -11,6 +12,6 @@ export const Button = (props: ButtonType) => {
     }
 
     return (
-        <button onClick={onClickHandler}>{props.title}</button>
+        <button onClick={onClickHandler} disabled={props.disabled}>{props.title}</button>
     )
 }

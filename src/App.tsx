@@ -1,47 +1,46 @@
 import React, {useState} from 'react';
 import './App.css';
 import {CounterContainer} from "./components/CounterContainer/CounterContainer";
-import {ValueContainer} from "./components/ValueContainer/ValueContainer";
+import {SettingInputContainer} from "./components/SettingInputContainer/SettingInputContainer";
+
 
 function App() {
-    // const
-    let [value, setValue] = useState(0);
-    let [error, setError] = useState<string | null>(null);
-    let [maxValue, setMaxValue] =useState<number>(Number(localStorage.getItem('maxValue')))
-    let [startValue, setStartValue] =useState<number>(Number(localStorage.getItem('startValue')))
+    const [value, setValue] = useState(0);
+    const [errorMaxValue, setErrorMaxValue] = useState<string | null>(null);
+    const [errorStartValue, setErrorStartValue] = useState<string | null>(null);
+    const [maxValue, setMaxValue] =useState<number>(Number(localStorage.getItem('maxValue')))
+    const [startValue, setStartValue] =useState<number>(Number(localStorage.getItem('startValue')))
 
     localStorage.setItem('maxValue', JSON.stringify(maxValue));
     localStorage.setItem('startValue', JSON.stringify(startValue));
 
     const addMaxValue = (value: number) => {
         if (value <= startValue) {
-            setError('Error')
+            setErrorMaxValue('Error')
             setMaxValue(value)
             return
         }
-        if (error) {
-            setError('')
+        if (errorMaxValue) {
+            setErrorMaxValue('Value correct')
         }
         setMaxValue(value)
     }
 
     const addStartValue = (value: number) => {
         if(value<0 || value >= maxValue) {
-            setError('Error')
+            setErrorStartValue('Error')
             setStartValue(value)
             return
         }
-        if (error) {
-            setError('')
+        if (errorStartValue) {
+            setErrorStartValue('Value correct')
         }
         setStartValue(value)
     }
-    // who return types function
 
     const incValue = (value: number): void => {
         if (value < maxValue) {
-            // const
-            let newValue = value + 1
+            const newValue = value + 1
             setValue(newValue)
         }
 
@@ -51,20 +50,20 @@ function App() {
     }
 
     const resetValue = () => {
-        setValue(value = startValue)
-
+        setValue(startValue)
     }
 
     return (
         <div className='container'>
-            <ValueContainer
+            <SettingInputContainer
                 maxValue={maxValue}
                 startValue={startValue}
                 addMaxValue={addMaxValue}
                 addStartValue={addStartValue}
                 value={value}
                 incValue={incValue}
-                error={error}
+                errorMaxValue={errorMaxValue}
+                errorStartValue={errorStartValue}
             />
             <CounterContainer
                 value={value}
@@ -72,7 +71,8 @@ function App() {
                 startValue={startValue}
                 incValue={incValue}
                 resetValue={resetValue}
-                error={error}
+                errorMaxValue={errorMaxValue}
+                errorStartValue={errorStartValue}
             />
         </div>
     );

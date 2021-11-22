@@ -1,7 +1,7 @@
 import React from "react";
 import s from './CounterContainer.module.css'
 import {CounterBlock} from "./CounterBlock/CounterBlock";
-import {BtnBlock} from "./BtnBlock/BtnBlock";
+import {Button} from "../Button";
 
 type CounterContainerPropsType = {
     value: number
@@ -9,24 +9,31 @@ type CounterContainerPropsType = {
     startValue: number
     incValue: (value: number) => void
     resetValue: () => void
-    error: string | null
+    errorMaxValue: string | null
+    errorStartValue: string | null
 }
 
 export const CounterContainer = (props: CounterContainerPropsType) => {
+    const incValueHandler = () => {
+        props.incValue(props.value)
+    }
+
+    const resetValueHandler = () => {
+        props.resetValue()
+    }
     return (
         <div className={s.counter_container}>
             <CounterBlock
                 value={props.value}
                 maxValue={props.maxValue}
-                error={props.error}
+                errorMaxValue={props.errorMaxValue}
+                errorStartValue={props.errorStartValue}
             />
-            <BtnBlock
-                value={props.value}
-                maxValue={props.maxValue}
-                startValue={props.startValue}
-                incValue={props.incValue}
-                resetValue={props.resetValue}
-            />
+            <div className={s.btn_block}>
+                <Button title={'inc'} callBack={incValueHandler} disabled={props.value===props.maxValue}/>
+                <Button title={'reset'} callBack={resetValueHandler}/>
+            </div>
+
         </div>
     )
 }
