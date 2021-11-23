@@ -4,10 +4,11 @@ type InputType = {
     type: string
     value: number
     onChange: (e: ChangeEvent<HTMLInputElement>) => void
-    className: any
+    className: string
 }
 
 export const Input = (props: InputType) => {
+
     return (
         <input type={props.type}
                value={props.value}

@@ -6,8 +6,8 @@ import {SettingInputContainer} from "./components/SettingInputContainer/SettingI
 
 function App() {
     const [value, setValue] = useState(0);
-    const [errorMaxValue, setErrorMaxValue] = useState<string | null>(null);
-    const [errorStartValue, setErrorStartValue] = useState<string | null>(null);
+    const [error, setError] = useState(false);
+    const [isInitValue, setIsInitValue ] = useState(false)
     const [maxValue, setMaxValue] =useState<number>(Number(localStorage.getItem('maxValue')))
     const [startValue, setStartValue] =useState<number>(Number(localStorage.getItem('startValue')))
 
@@ -15,25 +15,27 @@ function App() {
     localStorage.setItem('startValue', JSON.stringify(startValue));
 
     const addMaxValue = (value: number) => {
+        setIsInitValue(true)
         if (value <= startValue) {
-            setErrorMaxValue('Error')
+            setError(true)
             setMaxValue(value)
             return
         }
-        if (errorMaxValue) {
-            setErrorMaxValue('Value correct')
+        if(error) {
+            setError(false)
         }
         setMaxValue(value)
     }
 
     const addStartValue = (value: number) => {
+        setIsInitValue(true)
         if(value<0 || value >= maxValue) {
-            setErrorStartValue('Error')
+            setError(true)
             setStartValue(value)
             return
         }
-        if (errorStartValue) {
-            setErrorStartValue('Value correct')
+        if(error) {
+            setError(false)
         }
         setStartValue(value)
     }
@@ -49,6 +51,11 @@ function App() {
         }
     }
 
+    const changeSetValue = ()=> {
+        setIsInitValue(false)
+        setValue(startValue)
+    }
+
     const resetValue = () => {
         setValue(startValue)
     }
@@ -62,8 +69,7 @@ function App() {
                 addStartValue={addStartValue}
                 value={value}
                 incValue={incValue}
-                errorMaxValue={errorMaxValue}
-                errorStartValue={errorStartValue}
+                changeSetValue={changeSetValue}
             />
             <CounterContainer
                 value={value}
@@ -71,8 +77,8 @@ function App() {
                 startValue={startValue}
                 incValue={incValue}
                 resetValue={resetValue}
-                errorMaxValue={errorMaxValue}
-                errorStartValue={errorStartValue}
+                error={error}
+                isInitValue={isInitValue}
             />
         </div>
     );

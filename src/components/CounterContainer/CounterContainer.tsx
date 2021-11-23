@@ -9,8 +9,8 @@ type CounterContainerPropsType = {
     startValue: number
     incValue: (value: number) => void
     resetValue: () => void
-    errorMaxValue: string | null
-    errorStartValue: string | null
+    error: boolean
+    isInitValue: boolean
 }
 
 export const CounterContainer = (props: CounterContainerPropsType) => {
@@ -26,8 +26,8 @@ export const CounterContainer = (props: CounterContainerPropsType) => {
             <CounterBlock
                 value={props.value}
                 maxValue={props.maxValue}
-                errorMaxValue={props.errorMaxValue}
-                errorStartValue={props.errorStartValue}
+                error={props.error}
+                isInitValue={props.isInitValue}
             />
             <div className={s.btn_block}>
                 <Button title={'inc'} callBack={incValueHandler} disabled={props.value===props.maxValue}/>

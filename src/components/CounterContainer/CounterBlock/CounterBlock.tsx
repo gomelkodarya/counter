@@ -5,17 +5,29 @@ import s from './CounterBlock.module.css'
 type CounterBlockPropsType = {
     value: number | string
     maxValue: number
-    errorMaxValue: string | null
-    errorStartValue: string | null
+    error: boolean
+    isInitValue: boolean
 }
 
 export const CounterBlock = (props: CounterBlockPropsType) => {
+
     return (
-            <div
-                className={props.value === props.maxValue ? s.red_counter : s.counter_block}>
-                {props.value}
-            </div>
+        <>
+            <div>{
+                props.error
+                    ? <div className={s.red_counter}>'Incorrect value!'</div>
+                    : props.isInitValue
+                        ? <div className={s.counter_block_for_set}>Enter values and press "set"</div>
+                        : <div className={props.value === props.maxValue ? s.red_counter : s.counter_block}>{props.value}</div>
+            }</div>
+        </>
     )
+    // return props.errorMaxValue || props.errorStartValue
+    //     ? <div className={s.red_counter}>{props.errorMaxValue ? props.errorMaxValue : props.errorStartValue}</div>
+    //     : <div className={props.value === props.maxValue ? s.red_counter : s.counter_block}>
+    //           {props.value}
+    //       </div>
+
 }
 
 
