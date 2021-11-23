@@ -70,6 +70,8 @@ function App() {
                 value={value}
                 incValue={incValue}
                 changeSetValue={changeSetValue}
+                isInitValue={isInitValue}
+                error={error}
             />
             <CounterContainer
                 value={value}
