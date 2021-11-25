@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import {CounterContainer} from "./components/CounterContainer/CounterContainer";
 import {SettingInputContainer} from "./components/SettingInputContainer/SettingInputContainer";
@@ -8,11 +8,17 @@ function App() {
     const [value, setValue] = useState(0);
     const [error, setError] = useState(false);
     const [isInitValue, setIsInitValue ] = useState(false)
-    const [maxValue, setMaxValue] =useState<number>(Number(localStorage.getItem('maxValue')))
-    const [startValue, setStartValue] =useState<number>(Number(localStorage.getItem('startValue')))
+    const [maxValue, setMaxValue] = useState<number>(5)
+    const [startValue, setStartValue] = useState<number>(0)
 
-    localStorage.setItem('maxValue', JSON.stringify(maxValue));
-    localStorage.setItem('startValue', JSON.stringify(startValue));
+    useEffect(() => {
+       if(localStorage.getItem('maxValue')){
+            setMaxValue(Number(localStorage.getItem('maxValue')))
+       }
+        if(localStorage.getItem('startValue')){
+            setStartValue(Number(localStorage.getItem('startValue')))
+        }
+    },[])
 
     const addMaxValue = (value: number) => {
         setIsInitValue(true)
@@ -54,6 +60,8 @@ function App() {
     const changeSetValue = ()=> {
         setIsInitValue(false)
         setValue(startValue)
+        localStorage.setItem('startValue', JSON.stringify(startValue));
+        localStorage.setItem('maxValue', JSON.stringify(maxValue));
     }
 
     const resetValue = () => {

@@ -22,12 +22,6 @@ export const CounterBlock = (props: CounterBlockPropsType) => {
             }</div>
         </>
     )
-    // return props.errorMaxValue || props.errorStartValue
-    //     ? <div className={s.red_counter}>{props.errorMaxValue ? props.errorMaxValue : props.errorStartValue}</div>
-    //     : <div className={props.value === props.maxValue ? s.red_counter : s.counter_block}>
-    //           {props.value}
-    //       </div>
-
 }
 
 
