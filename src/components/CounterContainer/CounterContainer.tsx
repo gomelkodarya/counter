@@ -21,6 +21,8 @@ export const CounterContainer = (props: CounterContainerPropsType) => {
     const resetValueHandler = () => {
         props.resetValue()
     }
+
+
     return (
         <div className={s.counter_container}>
             <CounterBlock
