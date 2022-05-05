@@ -37,7 +37,7 @@ export const counterReducer = (state: InitialStateType = initialState, action: A
                 ...state,
                 isInitValue: true,
                 startValue: action.value,
-                error: state.error ? false : state.error
+                error: state.error && false
             }
 
         case 'INC-VALUE':
